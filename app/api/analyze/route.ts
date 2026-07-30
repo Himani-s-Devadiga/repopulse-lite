@@ -1,21 +1,40 @@
 import { NextResponse } from "next/server";
+import { getRepository } from "@/lib/github";
+import { calculateScore } from "@/lib/score";
+import { generateReport } from "@/lib/ai";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const { owner, repo } = await request.json();
+
+    const data = await getRepository(owner, repo);
+
+    const healthScore = calculateScore(data);
+
+    const report = await generateReport(data);
 
     return NextResponse.json({
       success: true,
-      message: "API is working!",
-      receivedUrl: body.repoUrl,
+
+      repository: {
+        ...data,
+        healthScore,
+        report,
+      },
     });
-  } catch {
+
+  } catch (error: any) {
+
+    console.error("ERROR:", error);
+
     return NextResponse.json(
       {
         success: false,
-        message: "Something went wrong",
+        error: error.message,
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 }
