@@ -1,10 +1,12 @@
 # 🚀 RepoPulse Lite
 
-### AI-Powered GitHub Repository Analyzer
+## AI-Powered GitHub Repository Analyzer
 
-RepoPulse Lite is an AI-powered web application that analyzes GitHub repositories and provides insights about repository health, code quality, and improvement suggestions.
+RepoPulse Lite is an AI-powered web application that analyzes GitHub repositories and generates intelligent insights about repository health, development activity, and code quality.
 
-It combines GitHub API data with Large Language Models (LLMs) to generate intelligent repository analysis reports.
+It uses GitHub API data with Large Language Models (LLMs) to create automated repository analysis reports.
+
+---
 
 ## 🌐 Live Demo
 
@@ -14,105 +16,71 @@ https://repopulse-lite-nndv.vercel.app
 
 ## ✨ Features
 
-### 📊 Repository Health Analysis
-- Fetches GitHub repository information
+### 📊 Repository Analysis
+- Fetches GitHub repository details
 - Calculates repository health score
-- Analyzes project structure and metrics
+- Analyzes project metrics and activity
 
-### 🤖 AI-Powered Reports
-- Generates intelligent repository insights
-- Provides:
-  - Project overview
-  - Code quality analysis
-  - Strengths and weaknesses
-  - Improvement recommendations
-  - Security suggestions
+### 🤖 AI-Powered Insights
+- Generates repository summary
+- Provides code quality suggestions
+- Identifies improvement areas and risks
 
-### 🔍 Repository Analytics
-- Repository metadata analysis
-- Commit hygiene evaluation
-- Developer-friendly insights
+### 📈 Repository Analytics
+- Stars and forks
+- Contributors
+- Issues
+- Programming language
+- License details
+- Last updated activity
 
-### 🧠 Multiple AI Provider Support
-Supports different LLM providers:
-- Groq
-- OpenAI
+### 🧠 AI Provider Support
+- Groq API
+- OpenAI API
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
+**Frontend**
 - Next.js 16
-- TypeScript
 - React
+- TypeScript
 - Tailwind CSS
 
-### Backend
+**Backend**
 - Next.js API Routes
-- GitHub API integration
+- GitHub REST API
 
-### Artificial Intelligence
-- Groq API
-- OpenAI API
+**AI**
+- Groq
+- OpenAI-compatible LLM APIs
 
-### Deployment
+**Deployment**
 - Vercel
 
 ---
 
-## 📂 Project Structure
-
-repopulse-lite/
-│
-├── app/
-│ ├── api/
-│ │ └── analyze/
-│ │ └── route.ts
-│ │
-│ └── page.tsx
-│
-├── components/
-│
-├── lib/
-│ ├── github.ts
-│ ├── ai.ts
-│ └── score.ts
-│
-├── public/
-│
-└── package.json
-
-
-
----
-
-## ⚙️ Installation & Setup
+## ⚙️ Setup
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/Himani-s-Devadiga/repopulse-lite.git
-Navigate to the project:
 
-Bash
-
-cd repopulse-lite
 Install dependencies:
 
 Bash
 
 npm install
-Create .env.local file:
+Create .env.local:
 
 env
 
 GITHUB_TOKEN=your_github_token
-
 GROQ_API_KEY=your_groq_api_key
-
 OPENAI_API_KEY=your_openai_api_key
-Run the development server:
+Run:
 
 Bash
 
@@ -121,38 +89,37 @@ Open:
 
 
 http://localhost:3000
-🎯 How It Works
+
+🔄 How It Works
 User enters a GitHub repository URL
 
-Application fetches repository information using GitHub API
+GitHub API fetches repository information
 
 Repository metrics are calculated
 
-AI model analyzes repository details
+AI generates an executive analysis report
 
-A detailed report is generated
+📂 Project Structure
 
-📸 Screenshots
-(Add application screenshots here)
+app/
+ ├── api/analyze/
+ └── page.tsx
 
+lib/
+ ├── github.ts
+ ├── ai.ts
+ └── score.ts
 🚀 Future Improvements
- Code vulnerability scanning
+Commit complexity analysis
 
- Pull request analysis
+Pull request insights
 
- Contributor analytics
+Security scanning
 
- AI code improvement suggestions
-
- Repository comparison feature
+Repository comparison
 
 👩‍💻 Author
 Himani S. Devadiga
-
 Computer Science Engineering - Data Science
 
-GitHub:
-https://github.com/Himani-s-Devadiga
 
-⭐ Support
-If you like this project, consider giving it a star ⭐
