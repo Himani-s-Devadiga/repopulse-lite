@@ -100,7 +100,7 @@ http://localhost:300
 
 ## Screenshot
 
-![RepoPulse Dashboard](public/screenshots/repopulse-dashboard.png)
+![RepoPulse Dashboard](public/screenshots/home.png)
 
 🔄 How It Works:
 
