@@ -84,20 +84,20 @@ Run:
 
 Bash
 
-npm run dev
+npm run de
+v
 Open:
-
-
 http://localhost:3000
 
-🔄 How It Works
-User enters a GitHub repository URL
+🔄 How It Works:
 
-GitHub API fetches repository information
+# User enters a GitHub repository URL
 
-Repository metrics are calculated
+# GitHub API fetches repository information
 
-AI generates an executive analysis report
+# Repository metrics are calculated
+
+# AI generates an executive analysis report
 
 📂 Project Structure
 
@@ -109,14 +109,15 @@ lib/
  ├── github.ts
  ├── ai.ts
  └── score.ts
-🚀 Future Improvements
-Commit complexity analysis
+🚀 Future Improvements:
 
-Pull request insights
+# Commit complexity analysis
 
-Security scanning
+# Pull request insights
 
-Repository comparison
+# Security scanning
+
+# Repository comparison
 
 👩‍💻 Author
 Himani S. Devadiga
