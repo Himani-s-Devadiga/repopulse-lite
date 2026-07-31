@@ -95,12 +95,12 @@ Bash
 npm run de
 v
 Open:
-http://localhost:3000
+http://localhost:300
 
-## Screenshots
+
+## Screenshot
 
 ![RepoPulse Dashboard](public/screenshots/repopulse-dashboard.png)
-
 
 🔄 How It Works:
 
