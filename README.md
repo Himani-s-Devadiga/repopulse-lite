@@ -14,6 +14,14 @@ https://repopulse-lite-nndv.vercel.app
 
 ---
 
+Test Github links for the project:
+
+https://github.com/facebook/react
+https://github.com/vercel/next.js
+https://github.com/scikit-learn/scikit-learn
+
+----
+
 ## ✨ Features
 
 ### 📊 Repository Analysis
