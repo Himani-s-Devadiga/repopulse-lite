@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 RepoPulse Lite
 
-## Getting Started
+### AI-Powered GitHub Repository Analyzer
 
-First, run the development server:
+RepoPulse Lite is an AI-powered web application that analyzes GitHub repositories and provides insights about repository health, code quality, and improvement suggestions.
+
+It combines GitHub API data with Large Language Models (LLMs) to generate intelligent repository analysis reports.
+
+## 🌐 Live Demo
+
+https://repopulse-lite-nndv.vercel.app
+
+---
+
+## ✨ Features
+
+### 📊 Repository Health Analysis
+- Fetches GitHub repository information
+- Calculates repository health score
+- Analyzes project structure and metrics
+
+### 🤖 AI-Powered Reports
+- Generates intelligent repository insights
+- Provides:
+  - Project overview
+  - Code quality analysis
+  - Strengths and weaknesses
+  - Improvement recommendations
+  - Security suggestions
+
+### 🔍 Repository Analytics
+- Repository metadata analysis
+- Commit hygiene evaluation
+- Developer-friendly insights
+
+### 🧠 Multiple AI Provider Support
+Supports different LLM providers:
+- Groq
+- OpenAI
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js 16
+- TypeScript
+- React
+- Tailwind CSS
+
+### Backend
+- Next.js API Routes
+- GitHub API integration
+
+### Artificial Intelligence
+- Groq API
+- OpenAI API
+
+### Deployment
+- Vercel
+
+---
+
+## 📂 Project Structure
+
+repopulse-lite/
+│
+├── app/
+│ ├── api/
+│ │ └── analyze/
+│ │ └── route.ts
+│ │
+│ └── page.tsx
+│
+├── components/
+│
+├── lib/
+│ ├── github.ts
+│ ├── ai.ts
+│ └── score.ts
+│
+├── public/
+│
+└── package.json
+
+
+
+---
+
+## ⚙️ Installation & Setup
+
+Clone the repository:
 
 ```bash
+git clone https://github.com/Himani-s-Devadiga/repopulse-lite.git
+Navigate to the project:
+
+Bash
+
+cd repopulse-lite
+Install dependencies:
+
+Bash
+
+npm install
+Create .env.local file:
+
+env
+
+GITHUB_TOKEN=your_github_token
+
+GROQ_API_KEY=your_groq_api_key
+
+OPENAI_API_KEY=your_openai_api_key
+Run the development server:
+
+Bash
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
+🎯 How It Works
+User enters a GitHub repository URL
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Application fetches repository information using GitHub API
 
-## Learn More
+Repository metrics are calculated
 
-To learn more about Next.js, take a look at the following resources:
+AI model analyzes repository details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A detailed report is generated
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📸 Screenshots
+(Add application screenshots here)
 
-## Deploy on Vercel
+🚀 Future Improvements
+ Code vulnerability scanning
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ Pull request analysis
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ Contributor analytics
+
+ AI code improvement suggestions
+
+ Repository comparison feature
+
+👩‍💻 Author
+Himani S. Devadiga
+
+Computer Science Engineering - Data Science
+
+GitHub:
+https://github.com/Himani-s-Devadiga
+
+⭐ Support
+If you like this project, consider giving it a star ⭐
