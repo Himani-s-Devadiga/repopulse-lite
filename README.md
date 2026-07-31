@@ -98,10 +98,6 @@ Open:
 http://localhost:300
 
 
-## Screenshot
-
-![RepoPulse Dashboard](public/screenshots/home.png)
-
 🔄 How It Works:
 
 # User enters a GitHub repository URL
