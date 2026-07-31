@@ -97,6 +97,11 @@ v
 Open:
 http://localhost:3000
 
+## Screenshots
+
+![RepoPulse Lite Dashboard](public/screenshots/repopulse-dashboard.png)
+
+
 🔄 How It Works:
 
 # User enters a GitHub repository URL
@@ -117,6 +122,8 @@ lib/
  ├── github.ts
  ├── ai.ts
  └── score.ts
+
+
 🚀 Future Improvements:
 
 # Commit complexity analysis
