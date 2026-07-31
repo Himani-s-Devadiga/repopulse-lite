@@ -1,17 +1,16 @@
-import Groq from "groq-sdk";
+import OpenAI from "openai";
 
-
-const groq = new Groq({
+const client = new OpenAI({
   apiKey: process.env.GROQ_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1",
 });
 
+export async function generateReport(repo: any) {
+  try {
+    const prompt = `
+You are a Senior Software Engineering Architect.
 
-export async function generateReport(repo:any){
-
-  const prompt = `
-You are a senior software engineer.
-
-Analyze this GitHub repository:
+Analyze this GitHub repository.
 
 Repository:
 ${repo.full_name}
@@ -28,38 +27,52 @@ ${repo.stargazers_count}
 Forks:
 ${repo.forks_count}
 
+Open Issues:
+${repo.openIssues}
+
 Contributors:
 ${repo.contributorsCount}
 
 Recent Commits:
 ${repo.recentCommits}
 
+Health Score:
+${repo.healthScore}/100
 
-Generate an engineering report with:
+Commit Tier Breakdown:
+Tier 1: ${repo.tierBreakdown?.tier1}
+Tier 2: ${repo.tierBreakdown?.tier2}
+Tier 3: ${repo.tierBreakdown?.tier3}
 
-1. Executive Summary
-2. Strengths
-3. Weaknesses
-4. Recommendation
+Generate a markdown report with:
 
-Keep it concise.
+# Executive Summary
+
+# Development Momentum
+
+# Operational Risks
+
+# Commit Hygiene
+
+# Recommendations
+
+Keep it professional and concise.
 `;
 
+    const response = await client.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.3,
+    });
 
-const response = await groq.chat.completions.create({
-
-  messages:[
-    {
-      role:"user",
-      content:prompt
-    }
-  ],
-
-  model:"llama-3.3-70b-versatile"
-
-});
-
-
-return response.choices[0].message.content;
-
+    return response.choices[0]?.message?.content ?? "No report generated.";
+  } catch (error) {
+    console.error(error);
+    return "Unable to generate AI report.";
+  }
 }

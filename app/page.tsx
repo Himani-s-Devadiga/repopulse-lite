@@ -4,6 +4,7 @@ import { useState } from "react";
 import RepoChart from "@/components/RepoChart";
 import HealthBreakdown from "@/components/HealthBreakdown";
 import GradeBadge from "@/components/GradeBadge";
+import CommitTable from "@/components/CommitTable";
 
 
 export default function Home() {
@@ -388,124 +389,42 @@ width:`${score}%`
 </div>
 
 
-
-
-
-
-
 {/* Health Breakdown */}
-
-
-<HealthBreakdown repo={repo}/>
-
-
-
-
-
-
-
+<HealthBreakdown repo={repo} />
 
 {/* Grade Badge */}
+<GradeBadge score={score} />
 
-
-<GradeBadge score={score}/>
-
-
-
-
-
-
-
+{/* Commit Hygiene Audit */}
+<CommitTable commits={repo.commitDetails || []} />
 
 {/* Description */}
-
-
 <div className="mt-8 bg-slate-900 border border-slate-800 rounded-xl p-6">
+  <h3 className="font-semibold text-xl">
+    📝 Description
+  </h3>
 
-
-<h3 className="font-semibold text-xl">
-
-📝 Description
-
-</h3>
-
-
-<p className="text-slate-300 mt-3">
-
-{repo.description || "No description available"}
-
-</p>
-
-
+  <p className="text-slate-300 mt-3">
+    {repo.description || "No description available"}
+  </p>
 </div>
-
-
-
-
-
-
-
 
 {/* AI Report */}
+{report && (
+  <div className="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-8">
+    <h3 className="text-2xl font-semibold">
+      🤖 AI Engineering Report
+    </h3>
 
-
-
-{
-
-report && (
-
-
-<div className="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-8">
-
-
-<h3 className="text-2xl font-semibold">
-
-🤖 AI Engineering Report
-
-</h3>
-
-
-
-<div className="mt-5 whitespace-pre-line text-slate-300 leading-relaxed">
-
-
-{report}
-
+    <div className="mt-5 whitespace-pre-line text-slate-300 leading-relaxed">
+      {report}
+    </div>
+  </div>
+)}
 
 </div>
-
-
-
+)}
 </div>
-
-
-)
-
-}
-
-
-
-
-
-
-
-</div>
-
-
-)
-
-
-}
-
-
-
-</div>
-
-
 </main>
-
-
-  );
-
-
+);
 }

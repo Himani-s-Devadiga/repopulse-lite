@@ -7,30 +7,43 @@ export async function POST(request: Request) {
   try {
     const { owner, repo } = await request.json();
 
-    const data = await getRepository(owner, repo);
+    if (!owner || !repo) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Repository owner and name are required.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
-    const healthScore = calculateScore(data);
+    const repository = await getRepository(owner, repo);
 
-    const report = await generateReport(data);
+    const healthScore = calculateScore(repository);
+
+    const report = await generateReport({
+      ...repository,
+      healthScore,
+    });
 
     return NextResponse.json({
       success: true,
-
-      repository: {
-        ...data,
-        healthScore,
-        report,
-      },
+      repository,
+      healthScore,
+      report,
     });
-
   } catch (error: any) {
-
-    console.error("ERROR:", error);
+    console.error(error);
 
     return NextResponse.json(
       {
         success: false,
-        error: error.message,
+        error:
+          error.response?.data?.message ||
+          error.message ||
+          "Something went wrong.",
       },
       {
         status: 500,
