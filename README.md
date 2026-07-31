@@ -99,7 +99,7 @@ http://localhost:3000
 
 ## Screenshots
 
-![RepoPulse Lite Dashboard](public/screenshots/repopulse-dashboard.png)
+![RepoPulse Dashboard](public/screenshots/repopulse-dashboard.png)
 
 
 🔄 How It Works:
