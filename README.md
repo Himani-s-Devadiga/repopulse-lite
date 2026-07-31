@@ -92,8 +92,7 @@ Run:
 
 Bash
 
-npm run de
-v
+npm run dev
 Open:
 http://localhost:300
 
