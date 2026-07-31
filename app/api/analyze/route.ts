@@ -1,95 +1,88 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getRepository } from "@/lib/github";
-import { calculateScore } from "@/lib/score";
-import { generateReport } from "@/lib/ai";
+import OpenAI from "openai";
 
-export async function POST(request: NextRequest) {
+export async function generateReport(
+  repository: any,
+  provider: string = "groq"
+) {
   try {
-    const { owner, repo, provider } = await request.json();
+    let apiKey = "";
+    let baseURL = "";
+    let model = "";
 
-    // Validate input
-    if (!owner || !repo) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "GitHub repository owner and name are required.",
-        },
-        { status: 400 }
-      );
+    // Select AI Provider
+    if (provider === "groq") {
+      apiKey = process.env.GROQ_API_KEY || "";
+      baseURL = "https://api.groq.com/openai/v1";
+      model = "llama-3.3-70b-versatile";
+    } 
+    else if (provider === "openai") {
+      apiKey = process.env.OPENAI_API_KEY || "";
+      baseURL = "https://api.openai.com/v1";
+      model = "gpt-4o-mini";
+    } 
+    else {
+      throw new Error("Unsupported AI provider");
     }
 
-    // Fetch repository
-    const repository = await getRepository(owner, repo);
 
-    // Calculate repository health
-    const healthScore = calculateScore(repository);
+    if (!apiKey) {
+      throw new Error(`${provider} API key missing`);
+    }
 
-    // Generate AI report
-    const report = await generateReport(repository, provider);
 
-    return NextResponse.json({
-      success: true,
-      repository: {
-        ...repository,
-        healthScore,
-      },
-      healthScore,
-      report,
+    const client = new OpenAI({
+      apiKey,
+      baseURL,
     });
-  } catch (error: any) {
-    console.error("Analysis Error:", error);
 
-    // GitHub Repository Not Found
-    if (error.response?.status === 404) {
-      return NextResponse.json(
+
+    const prompt = `
+You are a senior software engineer.
+
+Analyze this GitHub repository and generate a detailed report.
+
+Repository Details:
+Name: ${repository.name}
+Description: ${repository.description}
+Language: ${repository.language}
+Stars: ${repository.stars}
+Forks: ${repository.forks}
+
+Provide:
+1. Project overview
+2. Code quality analysis
+3. Strengths
+4. Weaknesses
+5. Security concerns
+6. Improvement suggestions
+7. Overall rating
+`;
+
+
+    const response = await client.chat.completions.create({
+      model,
+      messages: [
         {
-          success: false,
-          error: "Repository not found. Please check the GitHub URL.",
+          role: "system",
+          content: "You analyze GitHub repositories professionally.",
         },
-        { status: 404 }
-      );
-    }
-
-    // GitHub Rate Limit
-    if (error.response?.status === 403) {
-      return NextResponse.json(
         {
-          success: false,
-          error:
-            "GitHub API rate limit exceeded. Please try again later.",
+          role: "user",
+          content: prompt,
         },
-        { status: 403 }
-      );
-    }
+      ],
+      temperature: 0.7,
+    });
 
-    // Unauthorized Token
-    if (error.response?.status === 401) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Invalid GitHub Personal Access Token.",
-        },
-        { status: 401 }
-      );
-    }
 
-    // AI Provider Error
-    if (error.message?.toLowerCase().includes("openai")) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "AI provider is currently unavailable.",
-        },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Something went wrong while analyzing the repository.",
-      },
-      { status: 500 }
+    return (
+      response.choices[0]?.message?.content ||
+      "No report generated."
     );
+
+
+  } catch (error: any) {
+    console.error("AI Report Error:", error);
+    throw error;
   }
 }
