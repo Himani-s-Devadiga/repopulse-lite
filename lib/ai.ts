@@ -40,9 +40,15 @@ Health Score:
 ${repo.healthScore}/100
 
 Commit Tier Breakdown:
-Tier 1: ${repo.tierBreakdown?.tier1}
-Tier 2: ${repo.tierBreakdown?.tier2}
-Tier 3: ${repo.tierBreakdown?.tier3}
+
+Tier 1:
+${repo.tierBreakdown?.tier1}
+
+Tier 2:
+${repo.tierBreakdown?.tier2}
+
+Tier 3:
+${repo.tierBreakdown?.tier3}
 
 Generate a markdown report with:
 

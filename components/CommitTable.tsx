@@ -46,7 +46,7 @@ export default function CommitTable({ commits }: CommitTableProps) {
 
   if (!commits || commits.length === 0) {
     return (
-      <div className="mt-10 bg-slate-900 rounded-xl p-8 text-center">
+      <div className="mt-10 bg-slate-900 rounded-2xl border border-slate-800 p-8 text-center shadow-xl">
         <h2 className="text-2xl font-bold">
           📋 Commit Hygiene Audit
         </h2>
@@ -61,6 +61,7 @@ export default function CommitTable({ commits }: CommitTableProps) {
   return (
     <div className="mt-10 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
 
+      {/* Header */}
       <div className="p-6 border-b border-slate-800">
 
         <div className="flex flex-col md:flex-row justify-between gap-5">
@@ -80,64 +81,64 @@ export default function CommitTable({ commits }: CommitTableProps) {
             placeholder="Search commit or author..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white md:w-80"
+            className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white md:w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-
         </div>
 
-        <div className="flex flex-wrap gap-4 mt-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
 
-          <div className="bg-slate-800 rounded-xl px-5 py-3">
+          <div className="bg-slate-800 rounded-xl p-4">
             <p className="text-slate-400 text-sm">
               Total Commits
             </p>
+
             <h3 className="text-2xl font-bold">
               {commits.length}
             </h3>
           </div>
 
-          <div className="bg-green-500/15 rounded-xl px-5 py-3 border border-green-500">
+          <div className="bg-green-500/15 border border-green-500 rounded-xl p-4">
             <p className="text-green-400 text-sm">
               Tier 1
             </p>
+
             <h3 className="text-xl font-bold">
               {tier1}
             </h3>
           </div>
 
-          <div className="bg-yellow-500/15 rounded-xl px-5 py-3 border border-yellow-500">
+          <div className="bg-yellow-500/15 border border-yellow-500 rounded-xl p-4">
             <p className="text-yellow-400 text-sm">
               Tier 2
             </p>
+
             <h3 className="text-xl font-bold">
               {tier2}
             </h3>
           </div>
 
-          <div className="bg-red-500/15 rounded-xl px-5 py-3 border border-red-500">
+          <div className="bg-red-500/15 border border-red-500 rounded-xl p-4">
             <p className="text-red-400 text-sm">
               Tier 3
             </p>
+
             <h3 className="text-xl font-bold">
               {tier3}
             </h3>
           </div>
 
         </div>
-
       </div>
 
       <div className="overflow-auto max-h-[650px]">
 
         <table className="w-full">
 
-          <thead className="sticky top-0 bg-slate-950">
+          <thead className="sticky top-0 bg-slate-950 z-10">
 
-            <tr className="text-slate-400 border-b border-slate-800">
+            <tr className="border-b border-slate-800 text-slate-400">
 
-              <th className="px-4 py-4 text-left">
-                SHA
-              </th>
+              <th className="px-4 py-4 text-left">SHA</th>
 
               <th className="px-4 py-4 text-left">
                 Commit Message
@@ -164,62 +165,69 @@ export default function CommitTable({ commits }: CommitTableProps) {
               </th>
 
             </tr>
-
           </thead>
-
           <tbody>
-
-            {filteredCommits.map((commit) => (
-
-              <tr
-                key={commit.sha}
-                className="border-b border-slate-800 hover:bg-slate-800 transition"
-              >
-
-                <td className="px-4 py-4 font-mono text-cyan-400">
-                  {commit.sha.substring(0,7)}
+            {filteredCommits.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={7}
+                  className="text-center py-10 text-slate-400"
+                >
+                  No matching commits found.
                 </td>
-
-                <td className="px-4 py-4 text-white max-w-md">
-                  {commit.message}
-                </td>
-
-                <td className="px-4 py-4 text-slate-300">
-                  {commit.author}
-                </td>
-
-                <td className="px-4 py-4 text-center">
-                  {commit.filesChanged}
-                </td>
-
-                <td className="px-4 py-4 text-center">
-                  {commit.totalLines}
-                </td>
-
-                <td className="px-4 py-4 text-center text-slate-400">
-                  {new Date(commit.date).toLocaleDateString()}
-                </td>
-
-                <td className="px-4 py-4 text-center">
-
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-semibold ${badgeColor(commit.tier)}`}
-                  >
-                    {commit.tier}
-                  </span>
-
-                </td>
-
               </tr>
+            ) : (
+              filteredCommits.map((commit) => (
+                <tr
+                  key={commit.sha}
+                  className="border-b border-slate-800 hover:bg-slate-800 transition"
+                >
+                  <td className="px-4 py-4 font-mono text-cyan-400">
+                    {commit.sha.substring(0, 7)}
+                  </td>
 
-            ))}
+                  <td className="px-4 py-4 text-white max-w-md">
+                    <span
+                      title={commit.message}
+                      className="block truncate"
+                    >
+                      {commit.message.length > 90
+                        ? commit.message.substring(0, 90) + "..."
+                        : commit.message}
+                    </span>
+                  </td>
 
+                  <td className="px-4 py-4 text-slate-300">
+                    {commit.author}
+                  </td>
+
+                  <td className="px-4 py-4 text-center">
+                    {commit.filesChanged}
+                  </td>
+
+                  <td className="px-4 py-4 text-center">
+                    {commit.totalLines}
+                  </td>
+
+                  <td className="px-4 py-4 text-center text-slate-400">
+                    {new Date(commit.date).toLocaleDateString()}
+                  </td>
+
+                  <td className="px-4 py-4 text-center">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-semibold ${badgeColor(
+                        commit.tier
+                      )}`}
+                    >
+                      {commit.tier}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
-
         </table>
-
       </div>
-
     </div>
   );
 }
