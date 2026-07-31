@@ -107,6 +107,51 @@ http://localhost:300
 
 # AI generates an executive analysis report
 
+## Flowchart
+                 User
+                   │
+                   ▼
+      Enters GitHub Repository URL
+                   │
+                   ▼
+          Next.js Frontend (React)
+                   │
+          Sends request to
+       /api/analyze endpoint
+                   │
+                   ▼
+          Next.js API Route
+                   │
+         Extract repository owner/name
+                   │
+                   ▼
+         GitHub REST API Calls
+                   │
+     ┌─────────────┼─────────────┐
+     ▼             ▼             ▼
+ Repository    Contributors    Commits
+ Details         Issues       Languages
+     └─────────────┼─────────────┘
+                   ▼
+        Calculate Repository Metrics
+         (Health Score Algorithm)
+                   │
+                   ▼
+      Create structured prompt with
+      repository statistics + metrics
+                   │
+                   ▼
+      Groq / OpenAI Compatible API
+                   │
+            LLM generates
+      Engineering Analysis Report
+                   │
+                   ▼
+     API returns JSON response
+                   │
+                   ▼
+       React renders dashboard
+
 📂 Project Structure
 
 app/
